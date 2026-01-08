@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import logoPng from "@/assets/logo.png";
 
 export default function TricolorHeader() {
   const [highContrast, setHighContrast] = useState(false);
@@ -24,17 +25,14 @@ export default function TricolorHeader() {
         <div className="flex items-center space-x-3">
           {/* GYANSETU emblem */}
           <div 
-            className="w-10 h-10 rounded-full bg-gradient-to-br from-saffron to-indianGreen flex items-center justify-center" 
+            className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-full" 
             aria-label="GYANSETU emblem"
           >
-            <svg 
-              className="w-6 h-6 text-white" 
-              fill="currentColor" 
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-            </svg>
+            <img 
+              src={logoPng} 
+              alt="GYANSETU Logo" 
+              className="w-full h-full object-cover"
+            />
           </div>
           
           <div>
