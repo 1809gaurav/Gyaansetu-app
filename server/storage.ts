@@ -86,8 +86,21 @@ export class MemStorage implements IStorage {
       createdAt: new Date(),
     };
 
+    const historyPack: ExamPack = {
+      id: "modern-history",
+      title: "Modern Indian History",
+      description: "300 questions on Indian National Movement",
+      category: "UPSC",
+      totalQuestions: 300,
+      size: 15,
+      language: "english",
+      isDownloadable: true,
+      createdAt: new Date(),
+    };
+
     this.examPacks.set(mathPack.id, mathPack);
     this.examPacks.set(gsPack.id, gsPack);
+    this.examPacks.set(historyPack.id, historyPack);
 
     // Create sample questions for math pack
     const sampleQuestions: Question[] = [
@@ -119,6 +132,51 @@ export class MemStorage implements IStorage {
         explanation: "Let CP of each article = Re 1. CP of 20 articles = Rs 20. SP of 16 articles = Rs 20. SP of each article = 20/16 = 1.25. Gain = 1.25 - 1 = 0.25. Gain% = (0.25/1) × 100 = 25%",
         difficulty: "medium",
         category: "Profit and Loss",
+        language: "english"
+      },
+      {
+        id: "q3",
+        examPackId: "ssc-cgl-math",
+        questionText: "A person crosses a 600m long street in 5 minutes. What is his speed in km/hr?",
+        options: [
+          { id: "a", text: "7.2 km/hr", isCorrect: true },
+          { id: "b", text: "8.4 km/hr", isCorrect: false },
+          { id: "c", text: "10 km/hr", isCorrect: false },
+          { id: "d", text: "3.6 km/hr", isCorrect: false }
+        ] as QuestionOption[],
+        explanation: "Speed = Distance / Time = 600m / (5 * 60)s = 2 m/s. To convert to km/hr: 2 * (18/5) = 7.2 km/hr",
+        difficulty: "easy",
+        category: "Time and Distance",
+        language: "english"
+      },
+      {
+        id: "q4",
+        examPackId: "upsc-gs",
+        questionText: "Which fundamental right was described by Dr. B.R. Ambedkar as the 'Heart and Soul of the Constitution'?",
+        options: [
+          { id: "a", text: "Right to Equality", isCorrect: false },
+          { id: "b", text: "Right against Exploitation", isCorrect: false },
+          { id: "c", text: "Right to Constitutional Remedies", isCorrect: true },
+          { id: "d", text: "Right to Freedom of Religion", isCorrect: false }
+        ] as QuestionOption[],
+        explanation: "Article 32 (Right to Constitutional Remedies) was called the Heart and Soul of the Constitution by Dr. Ambedkar.",
+        difficulty: "medium",
+        category: "Polity",
+        language: "english"
+      },
+      {
+        id: "q5",
+        examPackId: "upsc-gs",
+        questionText: "The 'Panchayati Raj' was first inaugurated in which state?",
+        options: [
+          { id: "a", text: "Rajasthan", isCorrect: true },
+          { id: "b", text: "Andhra Pradesh", isCorrect: false },
+          { id: "c", text: "Gujarat", isCorrect: false },
+          { id: "d", text: "Bihar", isCorrect: false }
+        ] as QuestionOption[],
+        explanation: "Panchayati Raj was first introduced in Nagaur district, Rajasthan on Oct 2, 1959.",
+        difficulty: "medium",
+        category: "Polity",
         language: "english"
       }
     ];
