@@ -323,13 +323,14 @@ export class VoiceCommandProcessor {
 
     // Extract option for select_option command
     if (action === "select_option") {
-      const optionMatch = transcript.match(/\b([abcd]|option [abcd]|first|second|third|fourth)\b/i);
+      // Improved matching for standalone letters and common variations
+      const optionMatch = transcript.match(/\b([abcd]|option [abcd]|first|second|third|fourth|one|two|three|four)\b/i);
       if (optionMatch) {
         const option = optionMatch[1].toLowerCase();
-        if (option.includes('a') || option.includes('first')) parameters.option = 'a';
-        else if (option.includes('b') || option.includes('second')) parameters.option = 'b';
-        else if (option.includes('c') || option.includes('third')) parameters.option = 'c';
-        else if (option.includes('d') || option.includes('fourth')) parameters.option = 'd';
+        if (option.includes('a') || option.includes('first') || option === 'one') parameters.option = 'a';
+        else if (option.includes('b') || option.includes('second') || option === 'two') parameters.option = 'b';
+        else if (option.includes('c') || option.includes('third') || option === 'three') parameters.option = 'c';
+        else if (option.includes('d') || option.includes('fourth') || option === 'four') parameters.option = 'd';
       }
     }
 

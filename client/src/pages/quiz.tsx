@@ -54,8 +54,12 @@ export default function Quiz() {
 
   // Voice command handling
   useEffect(() => {
-    if (transcript) {
+    if (transcript && isListening) {
       handleVoiceCommand(transcript);
+      // Automatically restart listening after processing a command to allow continuous interaction
+      setTimeout(() => {
+        if (!isListening) startListening();
+      }, 500);
     }
   }, [transcript]);
 
