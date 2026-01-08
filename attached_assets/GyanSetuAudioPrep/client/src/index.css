@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(210, 20%, 98%);
+  --foreground: hsl(220, 9%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(220, 9%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(220, 9%, 15%);
+  --primary: hsl(25, 95%, 53%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(220, 9%, 15%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --accent: hsl(98, 84%, 29%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(356, 90%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(220, 13%, 91%);
+  --input: hsl(220, 13%, 91%);
+  --ring: hsl(25, 95%, 53%);
+  --saffron: hsl(25, 95%, 53%);
+  --indian-green: hsl(98, 84%, 29%);
+  --radius: 0.5rem;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --background: hsl(220, 13%, 8%);
+  --foreground: hsl(210, 40%, 96%);
+  --card: hsl(220, 13%, 11%);
+  --card-foreground: hsl(210, 40%, 96%);
+  --popover: hsl(220, 13%, 11%);
+  --popover-foreground: hsl(210, 40%, 96%);
+  --primary: hsl(25, 95%, 53%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(220, 13%, 15%);
+  --secondary-foreground: hsl(210, 40%, 96%);
+  --muted: hsl(220, 13%, 15%);
+  --muted-foreground: hsl(215, 20%, 60%);
+  --accent: hsl(98, 84%, 35%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(356, 90%, 54%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(220, 13%, 18%);
+  --input: hsl(220, 13%, 18%);
+  --ring: hsl(25, 95%, 53%);
+}
+
+/* High contrast mode */
+[data-contrast="high"] {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 0%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 0%);
+  --border: hsl(0, 0%, 0%);
+  --primary: hsl(220, 100%, 40%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(120, 100%, 25%);
+  --accent-foreground: hsl(0, 0%, 100%);
+}
+
+[data-contrast="high"][data-theme="dark"] {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 0%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(0, 0%, 100%);
+}
+
+.tricolor-ribbon {
+  background: linear-gradient(to right, 
+    var(--saffron) 0%, 
+    var(--saffron) 33.33%, 
+    white 33.33%, 
+    white 66.66%, 
+    var(--indian-green) 66.66%, 
+    var(--indian-green) 100%);
+  height: 6px;
+}
+
+.voice-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.speaking-indicator {
+  animation: speaking 1.5s ease-in-out infinite;
+}
+
+@keyframes speaking {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.touch-target {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible, 
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Large text mode support */
+@media (prefers-reduced-motion: reduce) {
+  .voice-pulse,
+  .speaking-indicator {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(0, 0%, 0%);
+    --border: hsl(0, 0%, 0%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  /* Large touch targets */
+  button,
+  [role="button"],
+  a {
+    @apply touch-target;
+  }
+}
+
+@layer components {
+  .gyansetu-container {
+    @apply min-h-screen flex flex-col max-w-md mx-auto bg-background;
+  }
+
+  .gyansetu-card {
+    @apply bg-card rounded-lg p-4 border border-border;
+  }
+
+  .gyansetu-button {
+    @apply touch-target p-4 rounded-md font-medium transition-all focus:ring-2 focus:ring-ring;
+  }
+
+  .gyansetu-button-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90;
+  }
+
+  .gyansetu-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-muted;
+  }
+
+  .gyansetu-button-accent {
+    @apply bg-accent text-accent-foreground hover:opacity-90;
+  }
+}

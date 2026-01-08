@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>GYANSETU - Official Accessible Exam Prep</title>
+    <meta name="description" content="GYANSETU - Accessible, audio-first exam preparation mobile app for visually impaired students with government-style interface and voice navigation." />
+    
+    <!-- Accessibility meta tags -->
+    <meta name="theme-color" content="#FF9933" />
+    <meta name="application-name" content="GYANSETU" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GYANSETU" />
+    
+    <!-- Font preloads for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="GYANSETU - Official Accessible Exam Prep" />
+    <meta property="og:description" content="Audio-first exam preparation app designed for visually impaired students with voice navigation and government-style interface." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    
+    <style>
+      /* Critical CSS for immediate rendering */
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #faf9f7;
+        color: #1a1a1a;
+      }
+      
+      .loading-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #FF9933 0%, #138808 100%);
+        color: white;
+        text-align: center;
+      }
+      
+      .loading-screen h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      
+      .loading-screen p {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+      
+      .tricolor-loader {
+        width: 60px;
+        height: 6px;
+        background: linear-gradient(to right, #FF9933 0%, #FF9933 33.33%, white 33.33%, white 66.66%, #138808 66.66%, #138808 100%);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      /* Hide loading screen when app loads */
+      .app-loaded .loading-screen {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading screen with tricolor branding -->
+    <div class="loading-screen" id="loading-screen">
+      <h1>GYANSETU</h1>
+      <p>Official Accessible Exam Prep</p>
+      <div class="tricolor-loader" aria-label="Loading..."></div>
+      <div class="sr-only" role="status" aria-live="polite">
+        Loading GYANSETU application with audio-first interface
+      </div>
+    </div>
+    
+    <!-- Main app container -->
+    <div id="root"></div>
+    
+    <!-- Audio announcements for screen readers -->
+    <div id="audio-announcements" 
+         class="sr-only" 
+         aria-live="assertive" 
+         aria-atomic="true">
+      <span id="current-announcement"></span>
+    </div>
+    
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker registration for PWA functionality -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+      
+      // Hide loading screen when React app mounts
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+          document.body.classList.add('app-loaded');
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

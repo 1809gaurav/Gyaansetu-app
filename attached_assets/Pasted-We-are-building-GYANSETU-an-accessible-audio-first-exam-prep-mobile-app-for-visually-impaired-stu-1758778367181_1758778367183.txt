@@ -1,0 +1,285 @@
+We are building GYANSETU — an accessible, audio-first exam-prep mobile app for visually impaired students that should look and feel like an official government app. Use React Native or Flutter (mobile-first, web later). Follow these requirements exactly.
+
+Problem Statement Recap
+
+Visually impaired students face huge barriers because most prep apps are text-heavy and not optimized for screen readers. They need an audio-first, accessible app that delivers questions, explanations, and progress tracking through voice and sound-based interactions.
+
+Brand & Visual Direction (Government look & feel)
+
+App name: GYANSETU (use everywhere as the product name).
+
+Make the UI feel official and trustworthy like a government app:
+
+Use dignified, uncluttered layout, clear sections, and minimal ornamentation.
+
+Primary color palette: saffron (#FF9933) — white — India green (#138808) (use these subtly and accessibly).
+
+Include an Indian-flag-inspired element in the header or splash screen (e.g., a narrow saffron-white-green ribbon or a stylized tricolor bar). Ensure the flag element is respectful, non-intrusive, and accessible (high contrast).
+
+Use a simple emblem-like logo for GYANSETU that hints at the tricolor—avoid replicating the Ashoka Chakra in exact form if unsure of legal constraints; prefer a stylized motif using the three colors or a simple book + wave motif in saffron/green/white.
+
+Typography: highly legible, large sizes. UI must comply with accessibility contrast ratios.
+
+Tone: formal, supportive, and official-sounding microcopy (e.g., “GYANSETU — Official Accessible Exam Prep”).
+
+Proposed Solution (features recap)
+
+Audio-first interaction: All content read aloud via TTS.
+
+Voice navigation: Full controls by speech commands.
+
+Accessible UI: Large fonts, high contrast, TalkBack/VoiceOver support.
+
+Adaptive learning: Tracks weak areas; personalized audio revisions.
+
+Offline support: Downloadable question packs.
+
+Key Features
+
+Audio Quiz Mode — TTS reads questions + options; answer by voice or keypad; immediate spoken feedback.
+
+Voice Navigation & Commands — e.g., “Next question”, “Repeat”, “Explain answer”, “Skip”, “Mark for review”.
+
+Accessible Design — Dark/light modes, high-contrast toggle (with tricolor theme option), large tap targets, haptic confirmation.
+
+Progress Tracking — Spoken summaries; exportable reports (future Braille export).
+
+Content Packs — Competitive exam packs, downloadable for offline use.
+
+Technical Approach
+
+Frontend (Mobile App)
+
+Framework: React Native or Flutter. Cross-platform for Android & iOS.
+
+Accessibility: native TalkBack/VoiceOver, semantic accessibility labels, large fonts, adjustable text size.
+
+Audio: Use device TTS for offline; optional cloud TTS (Azure/Google) for natural voices.
+
+Branding: Splash screen and header that incorporate the Indian tricolor ribbon and the GYANSETU emblem. Ensure icons and graphical elements have accessible alt text.
+
+Backend
+
+DB: Firebase Firestore / Supabase.
+
+API: REST or GraphQL for fetching questions, tracking progress, managing downloads.
+
+Content Delivery: Pre-loaded packs, secure downloadable bundles.
+
+Voice Recognition
+
+Primary: Google Speech-to-Text (multilingual: Hindi/English).
+
+Offline fallback: simple keyword/DTMF recognition for A/B/C/D or numeric answers.
+
+AI Layer (Optional Advanced)
+
+Adaptive ML to recommend practice areas.
+
+Auto-summarization to convert explanations into short, spoken sentences.
+
+Architecture Flow
+
+App opens → GYANSETU splash (tricolor ribbon + emblem) → audio-guided login.
+
+Select language (Hindi / English).
+
+Choose subject/exam pack (voice or touch).
+
+App reads Q + options aloud.
+
+Answer via voice or keypad.
+
+System validates + responds with spoken feedback.
+
+Progress saved to backend.
+
+Weekly audio report generated.
+
+UI/UX Implementation Notes (government style + accessibility)
+
+Splash screen: GYANSETU name, small tricolor ribbon across top or bottom, short audio welcome: “Welcome to GYANSETU — Official Accessible Exam Prep.”
+
+Home screen: large tiles with clear labels, an always-available “Voice Command” button, and a visible “Download Packs” section.
+
+Color/tone: default light theme uses white background with saffron-green accents; provide a high-contrast tricolor-friendly theme toggle.
+
+Iconography: simple, easily-discernible icons; label every control with accessibility labels.
+
+Onboarding: audio-first tutorial that demonstrates voice commands and navigation.
+
+Deliverables — what to generate now
+
+Project scaffold (React Native or Flutter) with folder structure.
+
+Sample splash screen + home screen UI implementing tricolor and GYANSETU logo placeholder.
+
+Example TTS integration (device TTS) and Speech-to-Text stub (Google STT).
+
+Simple offline question pack downloader + local storage example.
+
+Accessibility checklist & sample ARIA/label usage for key screens.
+
+README with how to run, brand guidelines (tricolor usage rules), and assets placeholders.
+
+Extra constraints & guidance
+
+Respectful and modest use of the Indian flag colors—do not misuse the national flag. Use a ribbon or motif rather than a literal flag in UI elements where legal/ethical issues could arise.
+
+All UI elements must meet WCAG AA contrast by default.
+
+Keep copy formal and official-sounding for trustworthiness.
+
+Prioritize offline-first experience and low-bandwidth operation.
+
+Paste this into Replit AI and generate: (A) project scaffold + starter code, (B) UI mockups/screens, (C) TTS & STT integration examples, (D) offline pack demo, and (E) README & accessibility checklist.
+
+If you want, I can also create:
+
+a compact 2–3 sentence prompt for quick Replit runs, or
+
+initial React Native starter files (splash + TTS + simple quiz flow) right now. Which would you like next?
+
+You said:
+add one more point that he have to make this app beforemy  freetier expire like on new account ofo replit we got some free tier 
+ChatGPT said:
+
+Got it 👍 I’ll add that point in the “Extra constraints & guidance” section so Replit AI understands the urgency. Here’s the updated full prompt you can paste directly:
+
+Prompt for Replit AI — GYANSETU (Accessible Exam-Prep App)
+
+We are building GYANSETU — an accessible, audio-first exam-prep mobile app for visually impaired students that should look and feel like an official government app. Use React Native or Flutter (mobile-first, web later). Follow these requirements exactly.
+
+Problem Statement Recap
+
+Visually impaired students face huge barriers because most prep apps are text-heavy and not optimized for screen readers. They need an audio-first, accessible app that delivers questions, explanations, and progress tracking through voice and sound-based interactions.
+
+Brand & Visual Direction (Government look & feel)
+
+App name: GYANSETU (use everywhere as the product name).
+
+Make the UI feel official and trustworthy like a government app:
+
+Use dignified, uncluttered layout, clear sections, and minimal ornamentation.
+
+Primary color palette: saffron (#FF9933) — white — India green (#138808) (use these subtly and accessibly).
+
+Include an Indian-flag-inspired element in the header or splash screen (e.g., a narrow saffron-white-green ribbon or a stylized tricolor bar). Ensure the flag element is respectful, non-intrusive, and accessible (high contrast).
+
+Use a simple emblem-like logo for GYANSETU that hints at the tricolor—avoid replicating the Ashoka Chakra in exact form if unsure of legal constraints; prefer a stylized motif using the three colors or a simple book + wave motif in saffron/green/white.
+
+Typography: highly legible, large sizes. UI must comply with accessibility contrast ratios.
+
+Tone: formal, supportive, and official-sounding microcopy (e.g., “GYANSETU — Official Accessible Exam Prep”).
+
+Proposed Solution (features recap)
+
+Audio-first interaction: All content read aloud via TTS.
+
+Voice navigation: Full controls by speech commands.
+
+Accessible UI: Large fonts, high contrast, TalkBack/VoiceOver support.
+
+Adaptive learning: Tracks weak areas; personalized audio revisions.
+
+Offline support: Downloadable question packs.
+
+Key Features
+
+Audio Quiz Mode — TTS reads questions + options; answer by voice or keypad; immediate spoken feedback.
+
+Voice Navigation & Commands — e.g., “Next question”, “Repeat”, “Explain answer”, “Skip”, “Mark for review”.
+
+Accessible Design — Dark/light modes, high-contrast toggle (with tricolor theme option), large tap targets, haptic confirmation.
+
+Progress Tracking — Spoken summaries; exportable reports (future Braille export).
+
+Content Packs — Competitive exam packs, downloadable for offline use.
+
+Technical Approach
+
+Frontend (Mobile App)
+
+Framework: React Native or Flutter. Cross-platform for Android & iOS.
+
+Accessibility: native TalkBack/VoiceOver, semantic accessibility labels, large fonts, adjustable text size.
+
+Audio: Use device TTS for offline; optional cloud TTS (Azure/Google) for natural voices.
+
+Branding: Splash screen and header that incorporate the Indian tricolor ribbon and the GYANSETU emblem. Ensure icons and graphical elements have accessible alt text.
+
+Backend
+
+DB: Firebase Firestore / Supabase.
+
+API: REST or GraphQL for fetching questions, tracking progress, managing downloads.
+
+Content Delivery: Pre-loaded packs, secure downloadable bundles.
+
+Voice Recognition
+
+Primary: Google Speech-to-Text (multilingual: Hindi/English).
+
+Offline fallback: simple keyword/DTMF recognition for A/B/C/D or numeric answers.
+
+AI Layer (Optional Advanced)
+
+Adaptive ML to recommend practice areas.
+
+Auto-summarization to convert explanations into short, spoken sentences.
+
+Architecture Flow
+
+App opens → GYANSETU splash (tricolor ribbon + emblem) → audio-guided login.
+
+Select language (Hindi / English).
+
+Choose subject/exam pack (voice or touch).
+
+App reads Q + options aloud.
+
+Answer via voice or keypad.
+
+System validates + responds with spoken feedback.
+
+Progress saved to backend.
+
+Weekly audio report generated.
+
+UI/UX Implementation Notes (government style + accessibility)
+
+Splash screen: GYANSETU name, small tricolor ribbon across top or bottom, short audio welcome: “Welcome to GYANSETU — Official Accessible Exam Prep.”
+
+Home screen: large tiles with clear labels, an always-available “Voice Command” button, and a visible “Download Packs” section.
+
+Color/tone: default light theme uses white background with saffron-green accents; provide a high-contrast tricolor-friendly theme toggle.
+
+Iconography: simple, easily-discernible icons; label every control with accessibility labels.
+
+Onboarding: audio-first tutorial that demonstrates voice commands and navigation.
+
+Deliverables — what to generate now
+
+Project scaffold (React Native or Flutter) with folder structure.
+
+Sample splash screen + home screen UI implementing tricolor and GYANSETU logo placeholder.
+
+Example TTS integration (device TTS) and Speech-to-Text stub (Google STT).
+
+Simple offline question pack downloader + local storage example.
+
+Accessibility checklist & sample ARIA/label usage for key screens.
+
+README with how to run, brand guidelines (tricolor usage rules), and assets placeholders.
+
+Extra constraints & guidance
+
+Respectful and modest use of the Indian flag colors—do not misuse the national flag. Use a ribbon or motif rather than a literal flag in UI elements where legal/ethical issues could arise.
+
+All UI elements must meet WCAG AA contrast by default.
+
+Keep copy formal and official-sounding for trustworthiness.
+
+Prioritize offline-first experience and low-bandwidth operation.
+
+⚠️ Important: Please make this project within the free-tier time limit of a new Replit account. Optimize build steps and avoid dependencies that exceed free-tier resources.
