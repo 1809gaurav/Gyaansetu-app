@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide platform-specific badges and ensure full-screen feel */
+iframe[src*="replit.com"],
+#replit-badge,
+.replit-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 :root {
   --background: hsl(210, 20%, 98%);
   --foreground: hsl(220, 9%, 15%);
