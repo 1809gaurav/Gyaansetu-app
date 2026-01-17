@@ -277,8 +277,8 @@ export class VoiceCommandProcessor {
     };
 
     for (const [canonical, variants] of Object.entries(variations)) {
-      if ((word1 === canonical && variants.includes(word2)) ||
-          (word2 === canonical && variants.includes(word1))) {
+      if ((this.normalizeText(word1) === canonical && variants.includes(this.normalizeText(word2))) ||
+          (this.normalizeText(word2) === canonical && variants.includes(this.normalizeText(word1)))) {
         return true;
       }
     }

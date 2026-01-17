@@ -26,9 +26,14 @@ export function useTTS() {
     
     // Set language and voice properties
     utterance.lang = language === "hindi" ? "hi-IN" : "en-US";
-    utterance.rate = 1.1; // Slightly faster for less latency feel
+    utterance.rate = 1.0;
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
+
+    // Prefetch/Warm up speech engine
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
 
     // Event handlers
     utterance.onstart = () => {

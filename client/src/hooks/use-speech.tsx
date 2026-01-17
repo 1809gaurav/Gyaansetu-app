@@ -19,9 +19,9 @@ export function useSpeechRecognition() {
     const recognition = new SpeechRecognition();
 
     recognition.continuous = true;
-    recognition.interimResults = true;
+    recognition.interimResults = false; // Disable interim results for better accuracy on final phrases
     recognition.lang = 'en-US';
-    recognition.maxAlternatives = 1;
+    recognition.maxAlternatives = 3; // Increase alternatives for better fuzzy matching
 
     recognition.onstart = () => {
       setIsListening(true);
@@ -29,12 +29,13 @@ export function useSpeechRecognition() {
     };
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      const lastResult = event.results[event.results.length - 1];
-      if (lastResult.isFinal) {
-        const transcript = lastResult[0].transcript.trim().toLowerCase();
-        setTranscript(transcript);
-        console.log("Speech recognition result:", transcript);
-      }
+      const results = event.results;
+      const lastResult = results[results.length - 1];
+      
+      // Use the highest confidence alternative
+      const transcript = lastResult[0].transcript.trim().toLowerCase();
+      setTranscript(transcript);
+      console.log("Speech recognition result:", transcript);
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
