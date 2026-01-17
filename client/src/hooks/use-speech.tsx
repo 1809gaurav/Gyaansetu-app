@@ -101,34 +101,64 @@ export function useSpeechRecognition() {
 
   useEffect(() => {
     let lastVolumeUpTime = 0;
+    let volumeUpTimer: NodeJS.Timeout | null = null;
+    let isLongPress = false;
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      // In web browsers, volume keys are often not captureable directly for security
-      // but we can listen for specific keys that might be mapped or use a fallback.
-      // On mobile devices, volume buttons often trigger 'VolumeUp' / 'VolumeDown'.
-      // Some mobile browsers map volume keys to 'AudioVolumeUp' or similar.
       const isVolumeUp = event.key === 'ArrowUp' || 
                          event.key === 'VolumeUp' || 
                          event.key === 'AudioVolumeUp' ||
-                         (event as any).keyCode === 175; // Standard Volume Up keyCode
+                         (event as any).keyCode === 175;
 
       if (isVolumeUp) {
         const currentTime = Date.now();
-        if (currentTime - lastVolumeUpTime < 500) {
-          if (!isListening) {
-            startListening();
-            // Provide audio feedback
-            const feedback = new SpeechSynthesisUtterance("Listening mode activated");
-            // Fix pronunciation for feedback too
-            feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
-            window.speechSynthesis.speak(feedback);
+        
+        // Handle ArrowUp separately as requested (keep double-tap for ArrowUp)
+        if (event.key === 'ArrowUp') {
+          if (currentTime - lastVolumeUpTime < 500) {
+            if (!isListening) {
+              startListening();
+              const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+              feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
+              window.speechSynthesis.speak(feedback);
+            }
+          }
+          lastVolumeUpTime = currentTime;
+        } else {
+          // Handle VolumeUp with Long Press (Deep Press)
+          if (!volumeUpTimer && !isListening) {
+            isLongPress = false;
+            volumeUpTimer = setTimeout(() => {
+              isLongPress = true;
+              startListening();
+              const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+              feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
+              window.speechSynthesis.speak(feedback);
+              volumeUpTimer = null;
+            }, 800); // 800ms for "deep press"
           }
         }
-        lastVolumeUpTime = currentTime;
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      const isVolumeUp = event.key === 'VolumeUp' || 
+                         event.key === 'AudioVolumeUp' ||
+                         (event as any).keyCode === 175;
+      
+      if (isVolumeUp && volumeUpTimer) {
+        clearTimeout(volumeUpTimer);
+        volumeUpTimer = null;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown, true);
-    return () => window.removeEventListener('keydown', handleKeyDown, true);
+    window.addEventListener('keyup', handleKeyUp, true);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown, true);
+      window.removeEventListener('keyup', handleKeyUp, true);
+      if (volumeUpTimer) clearTimeout(volumeUpTimer);
+    };
   }, [isListening, startListening]);
 
   return {
