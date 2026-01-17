@@ -102,61 +102,60 @@ export function useSpeechRecognition() {
   useEffect(() => {
     let lastVolumeUpTime = 0;
     let volumeUpTimer: NodeJS.Timeout | null = null;
-    let isLongPress = false;
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      // Browsers often block volume keys or remap them. 
+      // We will listen for as many common volume-up mappings as possible.
       const isVolumeUp = event.key === 'ArrowUp' || 
                          event.key === 'VolumeUp' || 
                          event.key === 'AudioVolumeUp' ||
-                         (event as any).keyCode === 175;
+                         (event as any).keyCode === 175 ||
+                         (event as any).key === 'Up';
 
       if (isVolumeUp) {
         const currentTime = Date.now();
         
-        // Handle ArrowUp separately as requested (keep double-tap for ArrowUp)
-        if (event.key === 'ArrowUp') {
-          if (currentTime - lastVolumeUpTime < 500) {
-            if (!isListening) {
-              startListening();
-              const feedback = new SpeechSynthesisUtterance("Listening mode activated");
-              feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
-              window.speechSynthesis.speak(feedback);
-            }
+        // Always allow double-tap as a fallback for both ArrowUp and VolumeUp
+        if (currentTime - lastVolumeUpTime < 500) {
+          if (!isListening) {
+            startListening();
+            const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+            feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
+            window.speechSynthesis.speak(feedback);
           }
-          lastVolumeUpTime = currentTime;
-        } else {
-          // Handle VolumeUp with Long Press (Deep Press)
-          if (!volumeUpTimer && !isListening) {
-            isLongPress = false;
-            volumeUpTimer = setTimeout(() => {
-              isLongPress = true;
-              startListening();
-              const feedback = new SpeechSynthesisUtterance("Listening mode activated");
-              feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
-              window.speechSynthesis.speak(feedback);
-              volumeUpTimer = null;
-            }, 800); // 800ms for "deep press"
-          }
+        }
+        lastVolumeUpTime = currentTime;
+
+        // Also handle Long Press for VolumeUp keys specifically
+        if (event.key !== 'ArrowUp' && !volumeUpTimer && !isListening) {
+          volumeUpTimer = setTimeout(() => {
+            startListening();
+            const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+            feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
+            window.speechSynthesis.speak(feedback);
+            volumeUpTimer = null;
+          }, 600); // Shorter duration for better responsiveness
         }
       }
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      const isVolumeUp = event.key === 'VolumeUp' || 
-                         event.key === 'AudioVolumeUp' ||
-                         (event as any).keyCode === 175;
-      
-      if (isVolumeUp && volumeUpTimer) {
+      if (volumeUpTimer) {
         clearTimeout(volumeUpTimer);
         volumeUpTimer = null;
       }
     };
 
+    // Use both capturing and bubbling phases to ensure we catch the event
     window.addEventListener('keydown', handleKeyDown, true);
     window.addEventListener('keyup', handleKeyUp, true);
+    // Some mobile browsers might only fire these on specific elements
+    document.addEventListener('keydown', handleKeyDown, true);
+    
     return () => {
       window.removeEventListener('keydown', handleKeyDown, true);
       window.removeEventListener('keyup', handleKeyUp, true);
+      document.removeEventListener('keydown', handleKeyDown, true);
       if (volumeUpTimer) clearTimeout(volumeUpTimer);
     };
   }, [isListening, startListening]);
