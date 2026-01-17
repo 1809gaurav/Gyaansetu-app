@@ -71,8 +71,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { id } = req.params;
       const questions = await storage.getQuestionsByExamPack(id);
+      if (!questions || questions.length === 0) {
+        return res.status(404).json({ message: "No questions found for this exam pack" });
+      }
       res.json({ questions });
     } catch (error) {
+      console.error("Error fetching questions:", error);
       res.status(500).json({ message: "Failed to fetch questions", error });
     }
   });

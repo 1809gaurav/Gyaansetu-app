@@ -39,16 +39,19 @@ export default function ExamPackCard({ examPack, userId, currentLanguage, onSpea
   // Download mutation
   const downloadMutation = useMutation({
     mutationFn: async () => {
+      // Simulate download delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1500));
       const response = await apiRequest("POST", `/api/users/${userId}/offline/${examPack.id}`, {});
+      if (!response.ok) throw new Error("Failed to download");
       return response.json();
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/users", userId, "offline"] });
       toast({ 
         title: "Download Complete", 
         description: `${examPack.title} is now available offline` 
       });
       onSpeak(`${examPack.title} downloaded successfully and is now available offline`, currentLanguage);
-      queryClient.invalidateQueries({ queryKey: ["/api/users", userId, "offline"] });
       setIsDownloading(false);
     },
     onError: () => {
