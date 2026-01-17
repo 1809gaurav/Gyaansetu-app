@@ -18,7 +18,11 @@ export function useTTS() {
       speechSynthesis.cancel();
     }
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    let processedText = text;
+    // Fix pronunciation of GyanSetu
+    processedText = processedText.replace(/GyanSetu/gi, "Gyan Setu");
+    
+    const utterance = new SpeechSynthesisUtterance(processedText);
     
     // Set language and voice properties
     utterance.lang = language === "hindi" ? "hi-IN" : "en-US";
