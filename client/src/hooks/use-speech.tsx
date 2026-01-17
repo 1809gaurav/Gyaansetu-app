@@ -159,6 +159,17 @@ export function useSpeechRecognition() {
       if (currentTime - lastTapTime < 300) { // 300ms for double tap
         if (!isListening) {
           event.preventDefault(); // Prevent zoom on double tap
+          
+          // Request Fullscreen to hide address bar
+          const docEl = document.documentElement;
+          if (docEl.requestFullscreen) {
+            docEl.requestFullscreen().catch(() => {});
+          } else if ((docEl as any).webkitRequestFullscreen) {
+            (docEl as any).webkitRequestFullscreen();
+          } else if ((docEl as any).msRequestFullscreen) {
+            (docEl as any).msRequestFullscreen();
+          }
+
           startListening();
           const feedback = new SpeechSynthesisUtterance("Listening mode activated");
           feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
