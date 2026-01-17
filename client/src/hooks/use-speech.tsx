@@ -103,16 +103,23 @@ export function useSpeechRecognition() {
     let lastVolumeUpTime = 0;
     const handleKeyDown = (event: KeyboardEvent) => {
       // In web browsers, volume keys are often not captureable directly for security
-      // but we can listen for specific keys that might be mapped or use a fallback
-      // For the hackathon demo, we'll map a double press of a common key (like 'v' or 'ArrowUp')
-      // to simulate the volume button if the actual volume keys are blocked by the browser.
-      if (event.key === 'ArrowUp' || event.key === 'VolumeUp') {
+      // but we can listen for specific keys that might be mapped or use a fallback.
+      // On mobile devices, volume buttons often trigger 'VolumeUp' / 'VolumeDown'.
+      // Some mobile browsers map volume keys to 'AudioVolumeUp' or similar.
+      const isVolumeUp = event.key === 'ArrowUp' || 
+                         event.key === 'VolumeUp' || 
+                         event.key === 'AudioVolumeUp' ||
+                         (event as any).keyCode === 175; // Standard Volume Up keyCode
+
+      if (isVolumeUp) {
         const currentTime = Date.now();
         if (currentTime - lastVolumeUpTime < 500) {
           if (!isListening) {
             startListening();
-            // Optional: Provide audio feedback
+            // Provide audio feedback
             const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+            // Fix pronunciation for feedback too
+            feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
             window.speechSynthesis.speak(feedback);
           }
         }
@@ -120,8 +127,8 @@ export function useSpeechRecognition() {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
   }, [isListening, startListening]);
 
   return {
