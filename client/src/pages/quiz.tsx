@@ -56,12 +56,8 @@ export default function Quiz() {
   useEffect(() => {
     if (transcript && isListening) {
       handleVoiceCommand(transcript);
-      // Automatically restart listening after processing a command to allow continuous interaction
-      setTimeout(() => {
-        if (!isListening) startListening();
-      }, 500);
     }
-  }, [transcript]);
+  }, [transcript, isListening]);
 
   // Load language preference
   useEffect(() => {

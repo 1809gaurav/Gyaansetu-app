@@ -26,7 +26,7 @@ export function useTTS() {
     
     // Set language and voice properties
     utterance.lang = language === "hindi" ? "hi-IN" : "en-US";
-    utterance.rate = 0.9;
+    utterance.rate = 1.1; // Slightly faster for less latency feel
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
 
