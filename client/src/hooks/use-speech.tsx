@@ -151,11 +151,30 @@ export function useSpeechRecognition() {
     window.addEventListener('keyup', handleKeyUp, true);
     // Some mobile browsers might only fire these on specific elements
     document.addEventListener('keydown', handleKeyDown, true);
+
+    // Screen double tap listener
+    let lastTapTime = 0;
+    const handleTouchStart = (event: TouchEvent) => {
+      const currentTime = Date.now();
+      if (currentTime - lastTapTime < 300) { // 300ms for double tap
+        if (!isListening) {
+          event.preventDefault(); // Prevent zoom on double tap
+          startListening();
+          const feedback = new SpeechSynthesisUtterance("Listening mode activated");
+          feedback.text = feedback.text.replace(/GyanSetu/gi, "Gyan Setu");
+          window.speechSynthesis.speak(feedback);
+        }
+      }
+      lastTapTime = currentTime;
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
     
     return () => {
       window.removeEventListener('keydown', handleKeyDown, true);
       window.removeEventListener('keyup', handleKeyUp, true);
       document.removeEventListener('keydown', handleKeyDown, true);
+      window.removeEventListener('touchstart', handleTouchStart);
       if (volumeUpTimer) clearTimeout(volumeUpTimer);
     };
   }, [isListening, startListening]);
