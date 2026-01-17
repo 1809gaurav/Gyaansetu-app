@@ -60,13 +60,18 @@ export default function Home() {
   // Welcome announcement on load
   useEffect(() => {
     const timer = setTimeout(() => {
-      const welcomeMessage = currentLanguage === "english"
-        ? "Welcome to GYANSETU - Official Accessible Exam Prep. Voice commands are active."
+      let welcomeMessage = currentLanguage === "english"
+        ? "Welcome to GyanSetu - Official Accessible Exam Prep. Voice commands are active."
         : "ज्ञानसेतु में आपका स्वागत है - आधिकारिक सुलभ परीक्षा तैयारी। वॉयस कमांड सक्रिय हैं।";
+      
+      // Fix pronunciation of GyanSetu
+      welcomeMessage = welcomeMessage.replace(/GyanSetu/gi, "Gyan Setu");
+      
+      console.log("Speaking welcome message:", welcomeMessage);
       speak(welcomeMessage, currentLanguage);
-    }, 1500);
+    }, 2500); // Increased delay to ensure page is ready and TTS engine initialized
     return () => clearTimeout(timer);
-  }, [currentLanguage]);
+  }, [currentLanguage, speak]);
 
   const handleVoiceCommand = (command: string) => {
     console.log("Voice command received:", command);
