@@ -29,55 +29,53 @@ export default function VoiceCommands({
   };
 
   return (
-    <section className="glass-card p-6 border-white/5 shadow-2xl relative overflow-hidden" aria-labelledby="voice-commands-heading">
-      <div className="absolute top-0 right-0 p-4 opacity-10">
-        <i className="fas fa-microchip text-4xl" aria-hidden="true"></i>
-      </div>
+    <section className="gyansetu-card" aria-labelledby="voice-commands-heading">
+      <h2 id="voice-commands-heading" className="text-lg font-semibold mb-3">
+        {currentLanguage === "english" ? "Voice Commands" : "वॉयस कमांड"}
+      </h2>
       
-      <div className="flex items-center justify-between mb-6">
-        <h2 id="voice-commands-heading" className="text-lg font-bold text-white/90">
-          Neural Interface
-        </h2>
-        <div className="flex items-center space-x-2">
-          <Button
-            size="sm"
-            variant="ghost"
-            className="w-10 h-10 rounded-full bg-white/5 text-white/70"
-            onClick={onHelp}
-            aria-label="Help"
-          >
-            <i className="fas fa-question text-sm" aria-hidden="true"></i>
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            className="w-10 h-10 rounded-full bg-white/5 text-white/70"
-            onClick={onRepeat}
-            aria-label="Repeat last message"
-          >
-            <i className="fas fa-redo text-sm" aria-hidden="true"></i>
-          </Button>
-        </div>
-      </div>
-      
-      <div className="flex flex-col items-center justify-center py-6">
+      <div className="grid grid-cols-2 gap-3">
         <Button
-          size="lg"
-          className={`w-28 h-28 rounded-full shadow-2xl transition-all duration-500 transform ${
-            isListening 
-              ? "bg-primary text-white scale-110 motivational-glow animate-voice-pulse" 
-              : "bg-white/5 text-white/40 hover:bg-white/10"
+          className={`gyansetu-button ${
+            isListening ? 'gyansetu-button-accent speaking-indicator' : 'gyansetu-button-accent'
           }`}
           onClick={onVoiceToggle}
-          aria-label={isListening ? "Stop listening" : "Start listening"}
-          data-testid="button-voice-main"
+          aria-label={isListening ? "Stop voice command listening" : "Start voice command listening"}
+          data-testid="button-voice-toggle"
         >
-          <i className={`fas fa-microphone text-4xl ${isSpeaking ? 'animate-bounce' : ''}`} aria-hidden="true"></i>
+          <i className={`fas fa-microphone mr-2 ${isListening ? 'animate-pulse' : ''}`} aria-hidden="true"></i>
+          {getButtonText("listen")}
         </Button>
         
-        <p className={`mt-6 text-center text-sm font-bold tracking-widest uppercase transition-all duration-300 ${isListening ? "text-primary opacity-100" : "text-white/20 opacity-50"}`}>
-          {isListening ? (currentLanguage === "english" ? "Processing..." : "प्रोसेसिंग...") : (currentLanguage === "english" ? "Tap to Connect" : "कनेक्ट करने के लिए टैप करें")}
-        </p>
+        <Button
+          className="gyansetu-button gyansetu-button-secondary"
+          onClick={onRepeat}
+          aria-label="Repeat last announcement"
+          data-testid="button-repeat"
+        >
+          <i className="fas fa-redo mr-2" aria-hidden="true"></i>
+          {getButtonText("repeat")}
+        </Button>
+        
+        <Button
+          className="gyansetu-button gyansetu-button-secondary"
+          onClick={onHelp}
+          aria-label="Get help with voice commands"
+          data-testid="button-help"
+        >
+          <i className="fas fa-question-circle mr-2" aria-hidden="true"></i>
+          {getButtonText("help")}
+        </Button>
+        
+        <Button
+          className="gyansetu-button gyansetu-button-secondary"
+          onClick={() => {/* Audio settings */}}
+          aria-label="Audio settings"
+          data-testid="button-audio-settings"
+        >
+          <i className="fas fa-volume-up mr-2" aria-hidden="true"></i>
+          {getButtonText("audio")}
+        </Button>
       </div>
     </section>
   );

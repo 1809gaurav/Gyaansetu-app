@@ -17,15 +17,15 @@ export default function TricolorHeader() {
   };
 
   return (
-    <header className="glass-card border-b border-white/10 sticky top-0 z-50" role="banner">
+    <header className="bg-card border-b border-border" role="banner">
       {/* Tricolor ribbon */}
-      <div className="tricolor-ribbon opacity-80" aria-label="Indian tricolor ribbon" role="img"></div>
+      <div className="tricolor-ribbon" aria-label="Indian tricolor ribbon" role="img"></div>
       
       <div className="px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3">
           {/* GYANSETU emblem */}
           <div 
-            className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-full motivational-glow border-2 border-primary/30" 
+            className="w-12 h-12 flex items-center justify-center overflow-hidden rounded-full" 
             aria-label="GYANSETU emblem"
           >
             <img 
@@ -36,8 +36,8 @@ export default function TricolorHeader() {
           </div>
           
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">GYANSETU</h1>
-            <p className="text-xs text-primary font-medium uppercase tracking-wider">Empowering Every Dream</p>
+            <h1 className="text-xl font-bold text-foreground">GYANSETU</h1>
+            <p className="text-sm text-muted-foreground">Official Accessible Exam Prep</p>
           </div>
         </div>
         

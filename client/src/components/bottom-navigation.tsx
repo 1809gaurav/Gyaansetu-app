@@ -50,27 +50,27 @@ export default function BottomNavigation({ currentPage }: BottomNavigationProps)
 
   return (
     <nav 
-      className="glass-card border-t border-white/10 px-6 py-4 pb-8 rounded-none mt-auto" 
+      className="bg-card border-t border-border px-6 py-3" 
       role="navigation" 
       aria-label="Main navigation"
       data-testid="bottom-navigation"
     >
-      <div className="flex justify-around items-center max-w-md mx-auto">
+      <div className="flex justify-around items-center">
         {navigationItems.map((item) => (
           <button
             key={item.key}
-            className={`flex flex-col items-center space-y-2 p-3 transition-all touch-target rounded-2xl ${
+            className={`flex flex-col items-center space-y-1 p-2 transition-colors touch-target ${
               currentPage === item.key 
-                ? "text-primary bg-primary/10 font-bold scale-110 shadow-lg shadow-primary/5" 
-                : "text-white/40 hover:text-white/60"
+                ? "text-primary" 
+                : "text-muted-foreground hover:text-foreground"
             }`}
             onClick={() => handleNavigation(item.path, item.label)}
             aria-label={item.ariaLabel}
             aria-current={currentPage === item.key ? "page" : undefined}
             data-testid={`nav-${item.key}`}
           >
-            <i className={`${item.icon} text-2xl`} aria-hidden="true"></i>
-            <span className="text-[10px] font-bold uppercase tracking-wider">{item.label}</span>
+            <i className={`${item.icon} text-xl`} aria-hidden="true"></i>
+            <span className="text-xs font-medium">{item.label}</span>
           </button>
         ))}
       </div>

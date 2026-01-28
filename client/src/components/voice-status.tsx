@@ -37,27 +37,21 @@ export default function VoiceStatus({ isListening, isSupported, currentLanguage 
 
   return (
     <div 
-      className="px-6 py-4 glass-card mx-6 my-4 motivational-glow flex items-center justify-between border-white/5" 
+      className="px-6 py-3 bg-accent/10 border-b border-border" 
       id="voice-status" 
       aria-live="polite" 
       aria-atomic="true"
       data-testid="voice-status"
     >
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-3">
         <div 
-          className={`w-3 h-3 rounded-full ${isListening ? 'bg-primary animate-pulse' : 'bg-white/20'}`} 
+          className={`w-3 h-3 rounded-full ${getIndicatorColor()} ${isListening ? 'voice-pulse' : ''}`} 
           aria-hidden="true"
         ></div>
-        <span className="text-sm font-bold text-white/90 tracking-wide uppercase">
-          {isListening ? 
-            (currentLanguage === "english" ? "SYSTEM ACTIVE" : "सिस्टम सक्रिय") : 
-            (currentLanguage === "english" ? "SYSTEM STANDBY" : "सिस्टम स्टैंडबाय")
-          }
+        <span className={`text-sm font-medium ${getStatusColor()}`}>
+          {getStatusMessage()}
         </span>
       </div>
-      {isListening && (
-        <span className="text-[10px] font-bold text-primary animate-pulse tracking-widest uppercase">Listening</span>
-      )}
     </div>
   );
 }

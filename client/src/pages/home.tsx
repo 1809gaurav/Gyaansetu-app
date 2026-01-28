@@ -210,14 +210,14 @@ export default function Home() {
       <main className="flex-1 px-6 py-6 space-y-6" role="main">
         
         {/* Language Selection */}
-        <section className="glass-card p-6 motivational-glow" aria-labelledby="language-heading">
-          <h2 id="language-heading" className="text-lg font-bold mb-4 text-white/90">
-            {currentLanguage === "english" ? "Target Language" : "लक्ष्य भाषा"}
+        <section className="gyansetu-card" aria-labelledby="language-heading">
+          <h2 id="language-heading" className="text-lg font-semibold mb-3">
+            Select Language / भाषा चुनें
           </h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <Button
-              className={`gyansetu-button h-14 ${
-                currentLanguage === "english" ? "bg-primary text-white" : "bg-white/5 text-white/70"
+              className={`gyansetu-button ${
+                currentLanguage === "english" ? "gyansetu-button-primary" : "gyansetu-button-secondary"
               }`}
               onClick={() => handleLanguageChange("english")}
               aria-pressed={currentLanguage === "english"}
@@ -227,8 +227,8 @@ export default function Home() {
               English
             </Button>
             <Button
-              className={`gyansetu-button h-14 ${
-                currentLanguage === "hindi" ? "bg-primary text-white" : "bg-white/5 text-white/70"
+              className={`gyansetu-button ${
+                currentLanguage === "hindi" ? "gyansetu-button-primary" : "gyansetu-button-secondary"
               }`}
               onClick={() => handleLanguageChange("hindi")}
               aria-pressed={currentLanguage === "hindi"}
@@ -251,11 +251,11 @@ export default function Home() {
         />
 
         {/* Exam Packs Selection */}
-        <section className="glass-card p-6" aria-labelledby="exam-packs-heading">
-          <h2 id="exam-packs-heading" className="text-lg font-bold mb-4 text-white/90">
-            {currentLanguage === "english" ? "Your Mission Control" : "आपका मिशन कंट्रोल"}
+        <section className="gyansetu-card" aria-labelledby="exam-packs-heading">
+          <h2 id="exam-packs-heading" className="text-lg font-semibold mb-3">
+            Available Exam Packs
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {examPacksLoading ? (
               <div className="text-center py-4" data-testid="loading-exam-packs">
                 <div className="animate-pulse">Loading exam packs...</div>
@@ -279,40 +279,36 @@ export default function Home() {
         </section>
 
         {/* Progress Overview */}
-        <section className="glass-card p-6" aria-labelledby="progress-heading">
-          <ProgressOverview 
-            stats={stats}
-            currentLanguage={currentLanguage}
-            onSpeak={speak}
-          />
-        </section>
+        <ProgressOverview 
+          stats={stats}
+          currentLanguage={currentLanguage}
+          onSpeak={speak}
+        />
 
         {/* AI Assistant */}
-        <section className="glass-card p-6 border-primary/20" aria-labelledby="ai-heading">
-          <AIAssistant 
-            currentLanguage={currentLanguage}
-            onSpeak={speak}
-          />
-        </section>
+        <AIAssistant 
+          currentLanguage={currentLanguage}
+          onSpeak={speak}
+        />
 
         {/* Quick Actions */}
-        <section className="space-y-4 pt-4">
+        <section className="space-y-3">
           <Button
-            className="w-full h-16 gyansetu-button bg-primary text-white text-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
+            className="w-full gyansetu-button gyansetu-button-primary text-lg"
             onClick={handleStartQuiz}
             data-testid="button-start-quiz"
           >
-            <i className="fas fa-play-circle mr-3 text-2xl" aria-hidden="true"></i>
-            {currentLanguage === "english" ? "Launch Mission" : "मिशन शुरू करें"}
+            <i className="fas fa-play-circle mr-3 text-xl" aria-hidden="true"></i>
+            Start Quiz Session
           </Button>
           
           <Button
-            className="w-full h-14 gyansetu-button bg-accent text-white font-bold hover:scale-[1.02] transition-all"
+            className="w-full gyansetu-button gyansetu-button-accent text-lg"
             onClick={() => speak("Review mode not yet implemented", currentLanguage)}
             data-testid="button-review-marked"
           >
             <i className="fas fa-bookmark mr-3 text-xl" aria-hidden="true"></i>
-            Review Marked
+            Review Marked Questions
           </Button>
           
           <div className="grid grid-cols-2 gap-3">

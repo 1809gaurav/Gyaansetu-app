@@ -95,7 +95,7 @@ export default function ExamPackCard({ examPack, userId, currentLanguage, onSpea
 
   return (
     <div 
-      className="glass-card p-5 hover:border-primary/30 transition-all active:scale-95 cursor-pointer"
+      className="border border-border rounded-md p-4 hover:bg-muted/50 transition-colors"
       role="button" 
       tabIndex={0}
       onClick={handleCardClick}
