@@ -331,32 +331,33 @@ export default function Quiz() {
       </div>
 
       {/* Voice Controls */}
-      <div className="px-6 py-3 bg-muted/50 border-b border-border">
+      <div className="px-6 py-4 glass-card border-x-0 border-white/5 mx-0 rounded-none mb-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <Button
-              size="sm"
+              size="default"
               variant={isListening ? "default" : "secondary"}
               onClick={handleVoiceToggle}
+              className={`h-12 px-6 rounded-full font-bold transition-all ${isListening ? "bg-primary animate-pulse" : "bg-white/10"}`}
               data-testid="button-voice-toggle"
             >
-              <i className={`fas fa-microphone mr-2 ${isListening ? "animate-pulse" : ""}`} aria-hidden="true"></i>
-              {isListening ? "Listening..." : "Voice"}
+              <i className={`fas fa-microphone mr-2`} aria-hidden="true"></i>
+              {isListening ? "Listening" : "Voice Control"}
             </Button>
             <Button
-              size="sm"
+              size="icon"
               variant="secondary"
               onClick={readCurrentQuestion}
+              className="w-12 h-12 rounded-full bg-white/5"
               data-testid="button-repeat-question"
             >
-              <i className="fas fa-redo mr-2" aria-hidden="true"></i>
-              Repeat
+              <i className="fas fa-redo" aria-hidden="true"></i>
             </Button>
           </div>
           <Button
-            size="sm"
-            variant={markedQuestions.includes(currentQuestion.id) ? "default" : "secondary"}
+            variant={markedQuestions.includes(currentQuestion.id) ? "default" : "outline"}
             onClick={handleMarkForReview}
+            className={`h-12 px-6 rounded-full font-bold ${markedQuestions.includes(currentQuestion.id) ? "bg-accent border-accent" : "border-white/20 text-white/70"}`}
             data-testid="button-mark-review"
           >
             <i className="fas fa-bookmark mr-2" aria-hidden="true"></i>
@@ -367,24 +368,26 @@ export default function Quiz() {
 
       {/* Question Content */}
       <main className="flex-1 px-6 py-6" role="main">
-        <Card className="mb-6">
-          <CardContent className="pt-6">
-            <h2 className="text-lg font-semibold mb-4" data-testid="question-text">
+        <Card className="glass-card border-none mb-6">
+          <CardContent className="pt-8">
+            <h2 className="text-xl font-bold mb-6 text-white leading-tight" data-testid="question-text">
               {currentQuestion.questionText}
             </h2>
             
             {!showExplanation ? (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {options.map((option, index) => (
                   <Button
                     key={option.id}
                     variant={selectedOption === option.id ? "default" : "secondary"}
-                    className="w-full text-left justify-start p-4 h-auto"
+                    className={`w-full text-left justify-start p-6 h-auto glass-card border-white/5 hover:border-primary/50 transition-all ${
+                      selectedOption === option.id ? "bg-primary text-white border-primary" : "bg-white/5 text-white/90"
+                    }`}
                     onClick={() => handleOptionSelect(option.id)}
                     data-testid={`button-option-${String.fromCharCode(65 + index).toLowerCase()}`}
                   >
-                    <span className="font-medium mr-3">
-                      {String.fromCharCode(65 + index)}.
+                    <span className="font-bold text-primary mr-4 bg-primary/10 w-8 h-8 flex items-center justify-center rounded-full">
+                      {String.fromCharCode(65 + index)}
                     </span>
                     {option.text}
                   </Button>
