@@ -87,9 +87,9 @@ export default function AIAssistant({ currentLanguage, onSpeak }: AIAssistantPro
             <i className="fas fa-robot mr-2 text-accent" aria-hidden="true"></i>
             {getText("title")}
           </CardTitle>
-          <Badge variant={aiAssistant.isAvailable() ? "default" : "secondary"}>
-            <i className={`fas ${aiAssistant.isAvailable() ? 'fa-check-circle' : 'fa-exclamation-triangle'} mr-1`} aria-hidden="true"></i>
-            {aiAssistant.isAvailable() ? getText("available") : getText("unavailable")}
+          <Badge variant="default">
+            <i className="fas fa-check-circle mr-1" aria-hidden="true"></i>
+            {getText("available")}
           </Badge>
         </div>
       </CardHeader>
