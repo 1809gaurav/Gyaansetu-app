@@ -32,14 +32,9 @@ export class AIAssistant {
   }
 
   private async checkAPIAvailability() {
-    try {
-      const response = await fetch('/api/ai/status');
-      const data = await response.json();
-      this.isEnabled = data.available || false;
-    } catch (error) {
-      console.warn('AI Assistant API not available:', error);
-      this.isEnabled = false;
-    }
+    // Force AI assistant to be enabled even without API key for this prototype
+    this.isEnabled = true;
+    console.log('AI Assistant forced to enabled for prototype');
   }
 
   public isAvailable(): boolean {
