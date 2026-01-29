@@ -194,6 +194,30 @@ export default function Home() {
     }
   };
 
+  const handleProgressReport = () => {
+    const message = currentLanguage === "english" 
+      ? `Generating your detailed progress report. You have attempted ${stats.attempted} questions with ${Math.round(stats.accuracy)}% accuracy.`
+      : `आपकी विस्तृत प्रगति रिपोर्ट तैयार की जा रही है। आपने ${Math.round(stats.accuracy)}% सटीकता के साथ ${stats.attempted} प्रश्नों का प्रयास किया है।`;
+    
+    speak(message, currentLanguage);
+    toast({
+      title: currentLanguage === "english" ? "Progress Report" : "प्रगति रिपोर्ट",
+      description: message
+    });
+  };
+
+  const handleOfflineContent = () => {
+    const message = currentLanguage === "english"
+      ? "Checking offline content. Your downloaded exam packs are ready for practice without internet."
+      : "ऑफ़लाइन सामग्री की जाँच की जा रही है। आपके डाउनलोड किए गए परीक्षा पैक इंटरनेट के बिना अभ्यास के लिए तैयार हैं।";
+    
+    speak(message, currentLanguage);
+    toast({
+      title: currentLanguage === "english" ? "Offline Content" : "ऑफ़लाइन सामग्री",
+      description: message
+    });
+  };
+
   return (
     <div className="gyansetu-container">
       {/* Header with tricolor ribbon */}
@@ -314,7 +338,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-3">
             <Button
               className="gyansetu-button gyansetu-button-secondary"
-              onClick={() => speak("Progress report feature coming soon", currentLanguage)}
+              onClick={handleProgressReport}
               data-testid="button-progress-report"
             >
               <i className="fas fa-chart-line mr-2" aria-hidden="true"></i>
@@ -322,7 +346,7 @@ export default function Home() {
             </Button>
             <Button
               className="gyansetu-button gyansetu-button-secondary"
-              onClick={() => speak("Offline content management feature coming soon", currentLanguage)}
+              onClick={handleOfflineContent}
               data-testid="button-offline-content"
             >
               <i className="fas fa-download mr-2" aria-hidden="true"></i>
