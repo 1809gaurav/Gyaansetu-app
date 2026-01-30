@@ -127,8 +127,8 @@ export default function Home() {
         
       case "activate_ai":
         const aiMessage = currentLanguage === "english" 
-          ? "Gyan Sarthi here. I'm listening. How can I help with your studies today?"
-          : "ज्ञान सारथी यहाँ है। मैं सुन रहा हूँ। आज मैं आपकी पढ़ाई में कैसे मदद कर सकता हूँ?";
+          ? "Hi, I am Gyan Sarthi. I am listening. How can I help with your studies today?"
+          : "नमस्ते, मैं ज्ञान सारथी हूँ। मैं सुन रहा हूँ। आज मैं आपकी पढ़ाई में कैसे मदद कर सकता हूँ?";
         speak(aiMessage, currentLanguage);
         // Scroll to AI assistant component if needed or focus it
         const aiElement = document.querySelector('[data-testid="ai-assistant-card"]');
