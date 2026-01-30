@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import Quiz from "@/pages/quiz";
 import Analytics from "@/pages/analytics";
 import Profile from "@/pages/profile";
+import Lessons from "@/pages/lessons";
 import Login from "@/pages/login";
 import NotFound from "@/pages/not-found";
 import logoImage from "@assets/stock_images/education_app_logo_m_b3c4a4de.jpg";
@@ -90,6 +91,9 @@ function Router() {
       </Route>
       <Route path="/profile">
         {(params) => <ProtectedRoute component={Profile} path="/profile" {...params} />}
+      </Route>
+      <Route path="/lessons">
+        {(params) => <ProtectedRoute component={Lessons} path="/lessons" {...params} />}
       </Route>
       <Route component={NotFound} />
     </Switch>
