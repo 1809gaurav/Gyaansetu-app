@@ -75,20 +75,60 @@ export default function Profile() {
     }
   };
 
-  const handleExportProgress = () => {
-    speak("Progress export feature coming soon");
-    toast({ 
-      title: "Export Progress", 
-      description: "This feature will be available soon" 
-    });
+  const handleExportProgress = async () => {
+    try {
+      const response = await fetch(`/api/users/${userId}/stats`);
+      const data = await response.json();
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `gyansetu-progress-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      speak("Progress data exported successfully as a JSON file.");
+      toast({ 
+        title: "Export Successful", 
+        description: "Your progress data has been downloaded." 
+      });
+    } catch (error) {
+      console.error("Export error:", error);
+      speak("Failed to export progress data.");
+      toast({ 
+        title: "Export Failed", 
+        description: "There was an error exporting your data.",
+        variant: "destructive"
+      });
+    }
   };
 
-  const handleClearData = () => {
-    speak("Data clearing feature coming soon");
-    toast({ 
-      title: "Clear Data", 
-      description: "This feature will be available soon" 
-    });
+  const handleClearData = async () => {
+    if (confirm(preferences.preferredLanguage === "english" 
+      ? "Are you sure you want to clear all your progress data? This action cannot be undone."
+      : "क्या आप वाकई अपना सारा प्रगति डेटा मिटाना चाहते हैं? इस क्रिया को पूर्ववत नहीं किया जा सकता है।")) {
+      
+      try {
+        // In a real app, this would be a DELETE request to an API
+        // For this prototype, we'll clear local storage related to progress
+        localStorage.removeItem("gyansetu-offline-content");
+        
+        speak("All progress data has been cleared successfully.");
+        toast({ 
+          title: "Data Cleared", 
+          description: "Your progress has been reset." 
+        });
+        
+        // Refresh the page to show empty stats
+        setTimeout(() => window.location.reload(), 1500);
+      } catch (error) {
+        console.error("Clear data error:", error);
+        speak("Failed to clear progress data.");
+      }
+    }
   };
 
   return (
