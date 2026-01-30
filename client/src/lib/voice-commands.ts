@@ -154,6 +154,13 @@ export const VOICE_COMMANDS: VoiceCommand[] = [
     category: "accessibility"
   },
 
+  // AI Assistant commands
+  {
+    patterns: ["hey gyansarthi", "hi gyansarthi", "hello gyansarthi", "gyansarthi", "sarthi"],
+    action: "activate_ai",
+    description: "Activate AI Study Assistant",
+    category: "general"
+  },
   // Download commands
   {
     patterns: ["download", "download pack", "get pack", "install pack"],

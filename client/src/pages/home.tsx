@@ -125,6 +125,18 @@ export default function Home() {
         window.location.href = "/profile";
         break;
         
+      case "activate_ai":
+        const aiMessage = currentLanguage === "english" 
+          ? "Gyan Sarthi activated. How can I help with your studies today?"
+          : "ज्ञान सारथी सक्रिय हो गया है। आज मैं आपकी पढ़ाई में कैसे मदद कर सकता हूँ?";
+        speak(aiMessage, currentLanguage);
+        // Scroll to AI assistant component if needed or focus it
+        const aiElement = document.querySelector('[data-testid="ai-assistant-card"]');
+        if (aiElement) {
+          aiElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+        
       default:
         speak("Command recognized but not implemented yet", currentLanguage);
     }

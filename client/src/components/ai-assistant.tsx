@@ -16,16 +16,16 @@ export default function AIAssistant({ currentLanguage, onSpeak }: AIAssistantPro
 
   const getText = (key: string) => {
     const translations = {
-      title: currentLanguage === "english" ? "AI Study Assistant" : "AI अध्ययन सहायक",
+      title: currentLanguage === "english" ? "GyanSarthi" : "ज्ञानसारथी",
       unavailable: currentLanguage === "english" ? "Unavailable" : "अनुपलब्ध",
       available: currentLanguage === "english" ? "Available" : "उपलब्ध",
-      askQuestion: currentLanguage === "english" ? "Ask Study Question" : "अध्ययन प्रश्न पूछें",
-      getHelp: currentLanguage === "english" ? "Get Study Help" : "अध्ययन सहायता प्राप्त करें",
+      askQuestion: currentLanguage === "english" ? "Ask GyanSarthi" : "ज्ञानसारथी से पूछें",
+      getHelp: currentLanguage === "english" ? "Get Study Help" : "अध्ययन सहायता",
       generateQuestions: currentLanguage === "english" ? "Practice Questions" : "अभ्यास प्रश्न",
       recommendations: currentLanguage === "english" ? "Study Tips" : "अध्ययन सुझाव",
       description: currentLanguage === "english" 
-        ? "AI-powered study assistant to help with exam preparation"
-        : "परीक्षा तैयारी में सहायता के लिए AI-संचालित अध्ययन सहायक"
+        ? "GyanSarthi - Your AI Study Guide"
+        : "ज्ञानसारथी - आपका एआई अध्ययन मार्गदर्शक"
     };
     return translations[key as keyof typeof translations] || key;
   };
@@ -80,7 +80,7 @@ export default function AIAssistant({ currentLanguage, onSpeak }: AIAssistantPro
   };
 
   return (
-    <Card className="gyansetu-card">
+    <Card className="gyansetu-card" data-testid="ai-assistant-card">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">
