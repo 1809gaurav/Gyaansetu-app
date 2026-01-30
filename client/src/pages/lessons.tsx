@@ -19,25 +19,17 @@ const VIDEO_LESSONS: VideoLesson[] = [
     id: "1",
     title: "SSC CGL Strategy for Beginners",
     hindiTitle: "SSC CGL की तैयारी कैसे शुरू करें",
-    youtubeId: "dQw4w9WgXcQ", // Placeholder
-    duration: "15:20",
+    youtubeId: "kYPX_h7vKJs",
+    duration: "18:45",
     category: "Strategy"
   },
   {
     id: "2",
-    title: "Indian Polity: Fundamental Rights",
-    hindiTitle: "भारतीय राजनीति: मौलिक अधिकार",
-    youtubeId: "dQw4w9WgXcQ",
-    duration: "25:45",
-    category: "Polity"
-  },
-  {
-    id: "3",
-    title: "Ancient History: Indus Valley",
-    hindiTitle: "प्राचीन इतिहास: सिंधु घाटी सभ्यता",
-    youtubeId: "dQw4w9WgXcQ",
-    duration: "20:10",
-    category: "History"
+    title: "Complete GS Playlist for Exams",
+    hindiTitle: "परीक्षाओं के लिए संपूर्ण सामान्य अध्ययन",
+    youtubeId: "PL22tVRPdgORGLpQe02TNsGj0B-ECBRslG",
+    duration: "Playlist",
+    category: "General Studies"
   }
 ];
 
@@ -58,7 +50,12 @@ export default function Lessons() {
       : `वीडियो खोल रहा हूँ: ${video.hindiTitle}. यूट्यूब पर जा रहा हूँ।`;
     
     speak(message, currentLanguage);
-    window.open(`https://www.youtube.com/watch?v=${video.youtubeId}`, "_blank");
+    
+    const url = video.youtubeId.startsWith("PL") 
+      ? `https://www.youtube.com/playlist?list=${video.youtubeId}`
+      : `https://www.youtube.com/watch?v=${video.youtubeId}`;
+      
+    window.open(url, "_blank");
   };
 
   return (
@@ -79,7 +76,9 @@ export default function Lessons() {
             >
               <div className="relative aspect-video bg-muted">
                 <img 
-                  src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                  src={video.youtubeId.startsWith("PL") 
+                    ? `https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=500&auto=format&fit=crop` 
+                    : `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                   alt={currentLanguage === "english" ? video.title : video.hindiTitle}
                   className="w-full h-full object-cover"
                 />
