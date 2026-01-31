@@ -5,8 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTTS } from "@/hooks/use-tts";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search } from "lucide-react";
+import { Search, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import sscPdf from "@assets/SSC-CGL-eng-latest-GA-Samples_1769833603771.pdf";
 
 const STUDY_NOTES = [
   {
@@ -65,14 +66,26 @@ export default function Notes() {
       <main className="flex-1 px-4 py-6 space-y-6 overflow-hidden flex flex-col">
         <div className="flex items-center justify-between px-2">
           <h1 className="text-2xl font-bold">Study Notes</h1>
-          <Button 
-            size="icon" 
-            variant="ghost" 
-            onClick={() => speak("Study Notes page. Browse through summarized notes for History, Polity, and Geography.")}
-            data-testid="button-speak-notes-desc"
-          >
-            <i className="fas fa-volume-up text-xl" />
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              size="icon" 
+              variant="outline" 
+              asChild
+              data-testid="button-download-pdf"
+            >
+              <a href={sscPdf} download="SSC_CGL_General_Awareness.pdf" aria-label="Download PDF notes">
+                <Download className="h-5 w-5" />
+              </a>
+            </Button>
+            <Button 
+              size="icon" 
+              variant="ghost" 
+              onClick={() => speak("Study Notes page. Browse through summarized notes or download the full PDF.")}
+              data-testid="button-speak-notes-desc"
+            >
+              <i className="fas fa-volume-up text-xl" />
+            </Button>
+          </div>
         </div>
 
         <div className="relative px-2">
