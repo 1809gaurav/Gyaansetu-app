@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Home from "@/pages/home";
 import Quiz from "@/pages/quiz";
 import Analytics from "@/pages/analytics";
@@ -34,16 +34,19 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("gyansetu-theme", theme);
-    localStorage.setItem("gyansetu-high-contrast", highContrast.toString());
-    
-    document.documentElement.setAttribute("data-theme", theme);
-    if (highContrast) {
-      document.documentElement.setAttribute("data-contrast", "high");
-    } else {
-      document.documentElement.removeAttribute("data-contrast");
-    }
-  }, [theme, highContrast]);
+    let lastTap = 0;
+    const handleDoubleTap = (e: TouchEvent | MouseEvent) => {
+      const now = Date.now();
+      if (now - lastTap < 300) {
+        // Toggle listening mode via a custom event that components can listen to
+        window.dispatchEvent(new CustomEvent("gyansetu-toggle-listening"));
+      }
+      lastTap = now;
+    };
+
+    window.addEventListener("click", handleDoubleTap);
+    return () => window.removeEventListener("click", handleDoubleTap);
+  }, []);
 
   if (isLoading) {
     return (

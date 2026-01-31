@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,20 @@ interface AIAssistantProps {
 export default function AIAssistant({ currentLanguage, onSpeak }: AIAssistantProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [lastResponse, setLastResponse] = useState<string>("");
+  const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    const handleToggle = () => {
+      setIsListening(prev => !prev);
+      if (!isListening) {
+        onSpeak(currentLanguage === "english" ? "Listening enabled" : "सुनना शुरू किया गया");
+      } else {
+        onSpeak(currentLanguage === "english" ? "Listening disabled" : "सुनना बंद किया गया");
+      }
+    };
+    window.addEventListener("gyansetu-toggle-listening", handleToggle);
+    return () => window.removeEventListener("gyansetu-toggle-listening", handleToggle);
+  }, [isListening, currentLanguage, onSpeak]);
 
   const getText = (key: string) => {
     const translations = {
@@ -87,9 +101,11 @@ export default function AIAssistant({ currentLanguage, onSpeak }: AIAssistantPro
             <i className="fas fa-robot mr-2 text-accent" aria-hidden="true"></i>
             {getText("title")}
           </CardTitle>
-          <Badge variant="default">
-            <i className="fas fa-check-circle mr-1" aria-hidden="true"></i>
-            {getText("available")}
+          <Badge variant={isListening ? "destructive" : "default"} className="animate-pulse">
+            <i className={`fas ${isListening ? "fa-microphone" : "fa-check-circle"} mr-1`} aria-hidden="true"></i>
+            {isListening 
+              ? (currentLanguage === "english" ? "Listening..." : "सुन रहा हूँ...") 
+              : getText("available")}
           </Badge>
         </div>
       </CardHeader>
