@@ -10,6 +10,7 @@ import Analytics from "@/pages/analytics";
 import Profile from "@/pages/profile";
 import Lessons from "@/pages/lessons";
 import Notes from "@/pages/notes";
+import Schedules from "@/pages/schedules";
 import Login from "@/pages/login";
 import NotFound from "@/pages/not-found";
 import logoImage from "@assets/stock_images/education_app_logo_m_b3c4a4de.jpg";
@@ -98,6 +99,9 @@ function Router() {
       </Route>
       <Route path="/notes">
         {(params) => <ProtectedRoute component={Notes} path="/notes" {...params} />}
+      </Route>
+      <Route path="/schedules">
+        {(params) => <ProtectedRoute component={Schedules} path="/schedules" {...params} />}
       </Route>
       <Route component={NotFound} />
     </Switch>

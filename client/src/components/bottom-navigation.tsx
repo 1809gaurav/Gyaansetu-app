@@ -1,7 +1,7 @@
 import { useLocation } from "wouter";
 
 interface BottomNavigationProps {
-  currentPage: "home" | "quiz" | "analytics" | "profile" | "lessons" | "notes";
+  currentPage: "home" | "quiz" | "analytics" | "profile" | "lessons" | "notes" | "schedules";
 }
 
 export default function BottomNavigation({ currentPage }: BottomNavigationProps) {
@@ -35,6 +35,13 @@ export default function BottomNavigation({ currentPage }: BottomNavigationProps)
       icon: "fas fa-file-alt",
       label: "Notes",
       ariaLabel: "Study notes"
+    },
+    {
+      key: "schedules",
+      path: "/schedules",
+      icon: "fas fa-calendar-alt",
+      label: "Guide",
+      ariaLabel: "Exam schedules and patterns"
     },
     {
       key: "analytics",
