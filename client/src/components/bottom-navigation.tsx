@@ -1,7 +1,7 @@
 import { useLocation } from "wouter";
 
 interface BottomNavigationProps {
-  currentPage: "home" | "quiz" | "analytics" | "profile" | "lessons";
+  currentPage: "home" | "quiz" | "analytics" | "profile" | "lessons" | "notes";
 }
 
 export default function BottomNavigation({ currentPage }: BottomNavigationProps) {
@@ -28,6 +28,13 @@ export default function BottomNavigation({ currentPage }: BottomNavigationProps)
       icon: "fas fa-video",
       label: "Videos",
       ariaLabel: "Video lessons"
+    },
+    {
+      key: "notes",
+      path: "/notes",
+      icon: "fas fa-file-alt",
+      label: "Notes",
+      ariaLabel: "Study notes"
     },
     {
       key: "analytics",
