@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: gyansetu-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.11.0
+      # Comma-separated list of frontend origins allowed to call the API.
+      # Example: https://gyansetu.vercel.app,https://gyansetu-git-main.vercel.app
+      - key: CORS_ORIGIN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false

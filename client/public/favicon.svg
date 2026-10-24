@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GYANSETU logo">
+  <rect width="64" height="64" rx="14" fill="#faf9f7"/>
+  <rect x="8" y="14" width="48" height="8" rx="4" fill="#FF9933"/>
+  <rect x="8" y="28" width="48" height="8" rx="4" fill="#ffffff" stroke="#d9d9d9" stroke-width="1"/>
+  <rect x="8" y="42" width="48" height="8" rx="4" fill="#138808"/>
+</svg>

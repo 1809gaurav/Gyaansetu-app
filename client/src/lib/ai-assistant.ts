@@ -2,6 +2,7 @@
 // This integrates with OpenAI to provide intelligent study assistance
 
 import { toast } from "@/hooks/use-toast";
+import { apiUrl } from "./api";
 
 interface AIResponse {
   success: boolean;
@@ -55,7 +56,7 @@ export class AIAssistant {
     }
 
     try {
-      const response = await fetch('/api/ai/study-help', {
+      const response = await fetch(apiUrl('/api/ai/study-help'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ export class AIAssistant {
     }
 
     try {
-      const response = await fetch('/api/ai/explain-answer', {
+      const response = await fetch(apiUrl('/api/ai/explain-answer'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +147,7 @@ export class AIAssistant {
     }
 
     try {
-      const response = await fetch('/api/ai/generate-questions', {
+      const response = await fetch(apiUrl('/api/ai/generate-questions'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +194,7 @@ export class AIAssistant {
     }
 
     try {
-      const response = await fetch('/api/ai/study-recommendations', {
+      const response = await fetch(apiUrl('/api/ai/study-recommendations'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

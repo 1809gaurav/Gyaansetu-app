@@ -1,92 +1,128 @@
-<<<<<<< HEAD
-# GYANSETU
-Gyan Setu is an AI-powered education platform that bridges the learning gap using personalized, accessible, and smart digital solutions.
-=======
-# GYANSETU (ज्ञानसेतु) - Audio-First Exam Prep for Visually Impaired
+# GyanSetu
 
-GYANSETU is an accessible, audio-first exam preparation mobile application designed specifically for visually impaired students in India. The application features a clean, professional government-style interface with Indian tricolor branding, full voice navigation, and AI-powered study assistance.
+An interactive MCQ-based learning platform with voice-enabled answers.
 
-## 🚀 Vision
+## Features
 
-Empowering visually impaired students to prepare for competitive government exams (SSC, UPSC, Banking) through a specialized, audio-centric learning environment that bridges the accessibility gap in traditional education platforms.
+- 🎙️ **Voice Recognition**: Answer questions using your voice
+- 📚 **Rich Question Bank**: 40+ questions across 8 categories
+- 🎨 **Modern UI**: Premium design with smooth animations
+- 📱 **Responsive**: Works on all screen sizes
+- ✅ **Instant Feedback**: Get immediate results with explanations
+- 📊 **Progress Tracking**: Track your performance
 
-# GYANSETU (ज्ञानसेतु) - Audio-First Exam Prep for Visually Impaired
+## Tech Stack
 
-GYANSETU is an accessible, audio-first exam preparation mobile application designed specifically for visually impaired students in India. The application features a clean, professional government-style interface with Indian tricolor branding, full voice navigation, and AI-powered study assistance.
+- React 18 + TypeScript
+- Vite
+- Web Speech API
+- Vanilla CSS
 
-## 🚀 Vision
+## Getting Started
 
-Empowering visually impaired students to prepare for competitive government exams (SSC, UPSC, Banking) through a specialized, audio-centric learning environment that bridges the accessibility gap in traditional education platforms.
+### Prerequisites
 
-## ✨ Key Features
+- Node.js (v16 or higher)
+- Modern browser (Chrome, Edge, or Safari recommended)
 
-### 🎙️ Audio-First Design
-- **Full Voice Control**: Complete application navigation through voice commands.
-- **"Hey GyanSarthi"**: AI assistant activation via wake-word for immediate study help.
-- **High-Quality TTS**: Multi-language Text-to-Speech support for exam content and UI elements.
-- **Double-Tap Activation**: Quickly trigger listening mode and fullscreen view via screen gestures.
+### Installation
 
-### 📚 Exam Preparation
-- **SSC & UPSC Focus**: Specialized content and strategies for major competitive exams.
-- **Practice Quizzes**: Interactive audio-guided mock tests with instant feedback and explanations.
-- **Video Lessons**: Curated strategy and subject-specific video content with audio descriptions.
-- **Offline Mode**: Downloadable exam packs for study without an active internet connection.
+```bash
+# Install dependencies
+npm install
 
-### 🤖 GyanSarthi (AI Study Assistant)
-- **Voice-Activated Tutor**: Ask questions about topics, get explanations, and receive study tips.
-- **Personalized Recommendations**: AI-driven suggestions based on practice performance.
-- **Dynamic Question Generation**: Request extra practice questions on any specific topic.
-
-### 📊 Progress Tracking
-- **Detailed Analytics**: Track accuracy, questions attempted, and study time.
-- **Export Progress**: Download your study statistics as a JSON file for backup or sharing.
-- **Clear Data**: Privacy-focused data management to reset progress at any time.
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **React 18 + TypeScript**: For a robust, type-safe interactive interface.
-- **Vite**: Ultra-fast build tool and development server.
-- **Tailwind CSS**: Custom accessibility-first tricolor theme (Saffron, White, Green).
-- **Radix UI**: Accessible UI primitives for inclusive design.
-- **Wouter**: Lightweight client-side routing.
-- **TanStack Query (React Query)**: Efficient server state management and caching.
-
-### Backend
-- **Node.js + Express**: Scalable API development.
-- **PostgreSQL**: Reliable data persistence for users and exam content.
-- **Drizzle ORM**: Type-safe database toolkit.
-
-### Accessibility APIs
-- **Web Speech API**: Browser-native speech recognition for voice commands.
-- **SpeechSynthesis API**: Powerful text-to-speech engine.
-
-## 🎨 Theme & Accessibility
-- **Government-Style UI**: Professional design using Indian tricolor accents.
-- **High Contrast Mode**: Specialized mode for users with partial vision.
-- **Screen Reader Optimized**: Full ARIA compliance and semantic HTML.
-- **Audio Announcements**: Real-time audio feedback for all system actions.
-
-## 📁 Project Structure
-
-```text
-├── client/
-│   ├── src/
-│   │   ├── components/      # Accessible UI components (GyanSarthi, Header, etc.)
-│   │   ├── hooks/           # Voice recognition and TTS custom hooks
-│   │   ├── lib/             # Voice command processor and AI logic
-│   │   ├── pages/           # Main application screens (Home, Quiz, Lessons)
-│   ├── public/              # Static assets and PWA manifest
-├── server/
-│   ├── routes.ts            # API endpoints for exams and progress
-│   ├── ai-routes.ts         # GyanSarthi backend logic
-│   ├── storage.ts           # Data storage interface
-├── shared/
-│   └── schema.ts            # Database schema and Zod validation
+# Start development server
+npm run dev
 ```
 
-## 📱 PWA Support
-GYANSETU is designed as a Progressive Web App. For the best experience on mobile devices, use the "Add to Home Screen" option in your browser to access it like a native application with hidden address bars.
+The application will be available at `http://localhost:5174/`
 
----
-Developed with ❤️ for inclusive education.
+### Building for Production
+
+```bash
+npm run build
+```
+
+## Usage
+
+1. **Start the Quiz**: Click "Start Quiz" on the landing page
+2. **Answer Questions**:
+   - Click on an option, OR
+   - Use voice by clicking "Use Voice" and saying "Option A", "B", "C", or "D"
+3. **Submit**: Click "Submit Answer" to check your response
+4. **Continue**: Proceed through all questions
+5. **View Results**: See your final score and performance
+
+## Voice Commands
+
+The voice recognition supports multiple formats:
+- "Option A" / "Option B" / "Option C" / "Option D"
+- "A" / "B" / "C" / "D"
+- "First" / "Second" / "Third" / "Fourth"
+
+## Project Structure
+
+```
+src/
+├── assets/          # Images and static files
+├── components/      # Reusable UI components
+├── data/           # Question dataset
+├── hooks/          # Custom React hooks
+├── types/          # TypeScript type definitions
+├── App.tsx         # Main application component
+├── App.css         # Application styles
+└── index.css       # Global styles and design system
+```
+
+## Browser Compatibility
+
+- ✅ Chrome (recommended)
+- ✅ Edge
+- ✅ Safari
+- ⚠️ Firefox (limited voice support)
+
+## Deployment
+
+The app is split into two deployable pieces:
+
+| Piece | Host | What it runs |
+| --- | --- | --- |
+| Frontend (React/Vite) | Vercel | Static build from `dist/public` |
+| Backend (Express API) | Render | `dist/index.js` (also serves the SPA if opened directly) |
+
+### 1. Backend on Render
+
+1. Push this repository to GitHub and create a **New → Blueprint** (or Web Service) in Render.
+2. Render reads [`render.yaml`](./render.yaml) automatically. If configuring manually, use:
+   - Build command: `npm ci --include=dev && npm run build`
+   - Start command: `npm start`
+   - Health check path: `/api/health`
+3. Add the environment variables:
+   - `NODE_ENV=production`
+   - `CORS_ORIGIN=https://your-vercel-app.vercel.app` (comma-separate multiple origins)
+   - `OPENAI_API_KEY` (optional)
+4. Copy the public URL, e.g. `https://gyansetu-api.onrender.com`.
+
+> The backend currently uses in-memory storage (`server/storage.ts`), so users, progress and downloaded packs reset whenever the Render service restarts or redeploys.
+
+### 2. Frontend on Vercel
+
+1. Import the same repository in Vercel.
+2. [`vercel.json`](./vercel.json) already sets the build command (`npm run build:client`) and output directory (`dist/public`), plus SPA fallback routing.
+3. Add the environment variable:
+   - `VITE_API_URL=https://gyansetu-api.onrender.com`
+4. Deploy.
+
+If `VITE_API_URL` is left unset, the frontend calls the API on its own origin. That works when the whole app is hosted on Render, but not when the static frontend is on Vercel.
+
+### Hosting everything on Render only
+
+You can also open the Render service URL directly. The Express server serves the built frontend and the API from the same origin, so no CORS or `VITE_API_URL` configuration is needed.
+
+### Environment variables
+
+See [`.env.example`](./.env.example) for the complete list.
+
+## License
+
+MIT

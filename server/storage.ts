@@ -228,6 +228,7 @@ export class MemStorage implements IStorage {
     const pack: ExamPack = { 
       ...examPack, 
       id,
+      language: examPack.language || "english",
       isDownloadable: true,
       createdAt: new Date()
     };

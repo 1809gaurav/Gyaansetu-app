@@ -6,13 +6,14 @@ import TricolorHeader from "@/components/tricolor-header";
 import BottomNavigation from "@/components/bottom-navigation";
 import { useTTS } from "@/hooks/use-tts";
 import type { ProgressStats } from "@shared/schema";
+import type { ProgressStatsResponse } from "@/types/api-responses";
 
 export default function Analytics() {
   const [userId] = useState("demo-user");
   const { speak } = useTTS();
 
   // Fetch overall statistics
-  const { data: statsData, isLoading } = useQuery({
+  const { data: statsData, isLoading } = useQuery<ProgressStatsResponse>({
     queryKey: ["/api/users", userId, "stats"],
   });
 

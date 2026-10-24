@@ -7,7 +7,7 @@ import { useTTS } from "@/hooks/use-tts";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Search, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import sscPdf from "@assets/SSC-CGL-eng-latest-GA-Samples_1769833603771.pdf";
+import sscPdf from "@assets/Previous_year_1769833603771.pdf";
 
 const STUDY_NOTES = [
   {

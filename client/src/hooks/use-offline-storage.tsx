@@ -271,9 +271,7 @@ export function useOfflineStorage(userId: string): UseOfflineStorageReturn {
     try {
       // Estimate storage usage
       const dataSize = new Blob([JSON.stringify(offlineData)]).size;
-      const availableStorage = navigator.storage && navigator.storage.estimate 
-        ? 50 * 1024 * 1024 // 50MB estimate if API not available
-        : 50 * 1024 * 1024;
+      const availableStorage = 50 * 1024 * 1024; // 50MB estimate
       
       return {
         used: Math.round(dataSize / 1024 / 1024 * 100) / 100, // MB

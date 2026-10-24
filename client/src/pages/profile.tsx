@@ -9,6 +9,7 @@ import BottomNavigation from "@/components/bottom-navigation";
 import { useTTS } from "@/hooks/use-tts";
 import { toast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { apiUrl } from "@/lib/api";
 
 export default function Profile() {
   const [userId] = useState("demo-user");
@@ -77,7 +78,7 @@ export default function Profile() {
 
   const handleExportProgress = async () => {
     try {
-      const response = await fetch(`/api/users/${userId}/stats`);
+      const response = await fetch(apiUrl(`/api/users/${userId}/stats`));
       const data = await response.json();
       
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
